@@ -1,6 +1,9 @@
 #include <sstream>
 
 #include "decoder.h"
+#include "resize.h"
+#include <iostream>
+
 using namespace std;
 
 
@@ -17,13 +20,20 @@ int main() {
 #else
 	std::locale::global(std::locale("en_US.UTF-8"));
 #endif
-	std::vector<unsigned long> pixelData = {
-		0, 10, 20,30,40, 50,60, 70, 80,90, 100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,255
+	std::vector<PRECISION> pixelData = {
+		0, 10, 20, 30,
+		80, 90,100, 110,
+		150,160,170,180,
+		200, 150, 10, 5
 	};
 	std::string defaultPalette = "Wwli:,. ";
-	unsigned long valeurMax = 255;
-	std::string data = transformToASCII(pixelData, std::filesystem::path("palette2UTF8.txt"), valeurMax);
-	saveToFile(std::filesystem::path("test.txt"),data);
+	PRECISION valeurMax = 255;
+	std::vector<PRECISION> newPixelData = resize({4,4}, {2,2},pixelData);
+
+	std::cout << transformToASCII(pixelData,defaultPalette,valeurMax) << '\n';
+	std::cout << transformToASCII(newPixelData,defaultPalette,valeurMax);
+
+
 
 	return 0;
 }

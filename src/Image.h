@@ -2,24 +2,26 @@
 #define ASCIIART_IMAGE_H
 #include <vector>
 
+#define PRECISION unsigned long
+
 class Image {
 public:
 	Image();
 	~Image();
-	[[nodiscard]] unsigned long getRowNumber() const { return m_rowColumns.first; }
-	[[nodiscard]] unsigned long getColumnNumber() const { return m_rowColumns.second; }
-	[[nodiscard]] unsigned long getMaxGrayLevel() const { return m_maxGrayLevel; }
-	[[nodiscard]] std::vector<unsigned long> getPixelData() const { return m_pixelData; }
+	[[nodiscard]] PRECISION getRowNumber() const { return m_rowColumns.first; }
+	[[nodiscard]] PRECISION getColumnNumber() const { return m_rowColumns.second; }
+	[[nodiscard]] PRECISION getMaxGrayLevel() const { return m_maxGrayLevel; }
+	[[nodiscard]] std::vector<PRECISION> getPixelData() const { return m_pixelData; }
 
 private:
-	std::vector<unsigned long> m_pixelData;
-	std::pair<unsigned long, unsigned long> m_rowColumns;
-	unsigned long m_maxGrayLevel;
+	std::vector<PRECISION> m_pixelData;
+	std::pair<PRECISION, PRECISION> m_rowColumns;
+	PRECISION m_maxGrayLevel;
 
-	void setColumnNumber(const unsigned long n) { m_rowColumns.second = n; }
-	void setRowNumber(const unsigned long n) { m_rowColumns.first = n; }
+	void setColumnNumber(const PRECISION n) { m_rowColumns.second = n; }
+	void setRowNumber(const PRECISION n) { m_rowColumns.first = n; }
 
-	void setMaxGreyLevel(unsigned long n) {
+	void setMaxGreyLevel(PRECISION n) {
 		m_maxGrayLevel = n;
 	}
 };
