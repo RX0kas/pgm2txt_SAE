@@ -4,7 +4,8 @@
 
 class Image {
 public:
-	Image();
+	Image(std::string fileName);
+
 	~Image();
 	[[nodiscard]] unsigned long getRowNumber() const { return m_rowColumns.first; }
 	[[nodiscard]] unsigned long getColumnNumber() const { return m_rowColumns.second; }
