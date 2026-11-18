@@ -7,6 +7,29 @@
 #include <fstream>
 #include <format>
 
+std::string transformToASCII(const std::vector<unsigned long> &data, std::filesystem::path path, unsigned long valeurMax) {
+	std::ifstream stream(path);
+	if (!stream.is_open()) {
+		std::cout << std::format("The file {} can't be open",path.string());
+		exit(1);
+	}
+
+	std::string palette;
+	while (!stream.eof()) {
+		std::string temp;
+		getline(stream, temp);
+		std::string chars;
+		for (auto c : temp) {
+			if (c!='\r') {
+				chars += c;
+			}
+		}
+		palette+=chars;
+	}
+
+	return transformToASCII(data,palette, valeurMax);
+}
+
 std::string transformToASCII(const std::vector<unsigned long> &data, const std::string &palette, unsigned long valeurMax) {
 	std::stringstream ss;
 	for (const auto p : data) {
