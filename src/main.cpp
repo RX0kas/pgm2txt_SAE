@@ -1,15 +1,39 @@
 #include <iostream>
 
 #include "decoder.h"
-#include "Image.h"
+#include "resize.h"
+#include <iostream>
+
 using namespace std;
 
+
+#include "Image.h"
+
+#ifdef PLATFORM_WINDOWS
+#include <Windows.h>
+#endif
+
+
 int main() {
-	string fileName;
-	cout << "Nom du fichier à ouvrir : ";
-	cin >> fileName;
-	Image images(fileName);
-	std::string p = "Wwlmi, ";
-	std::cout << transformToASCII(images.getPixelData(),p, 255);
+#ifdef PLATFORM_WINDOWS
+	SetConsoleOutputCP(65001);
+#else
+	std::locale::global(std::locale("en_US.UTF-8"));
+#endif
+	std::vector<PRECISION> pixelData = {
+		0, 10, 20, 30,
+		80, 90,100, 110,
+		150,160,170,180,
+		200, 150, 10, 5
+	};
+	std::string defaultPalette = "Wwli:,. ";
+	PRECISION valeurMax = 255;
+	std::vector<PRECISION> newPixelData = resize({4,4}, {2,2},pixelData);
+
+	std::cout << transformToASCII(pixelData,defaultPalette,valeurMax) << '\n';
+	std::cout << transformToASCII(newPixelData,defaultPalette,valeurMax);
+
+
+
 	return 0;
 }
