@@ -3,6 +3,6 @@
 #include <vector>
 #include "Image.h"
 
-std::vector<PRECISION> resize(const std::pair<PRECISION, PRECISION> &oldSize, const std::pair<PRECISION, PRECISION> &newSize, const std::vector<PRECISION>& data);
+std::vector<uint8_t> resize(const std::pair<uint8_t, uint8_t> &oldSize, const std::pair<uint8_t, uint8_t> &newSize, const std::vector<uint8_t>& data);
 
 #endif //ASCIIART_RESIZE_H

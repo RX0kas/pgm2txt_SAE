@@ -7,7 +7,7 @@
 #include <fstream>
 #include <format>
 
-std::string transformToASCII(const std::vector<PRECISION> &data, std::filesystem::path path, PRECISION valeurMax) {
+std::string transformToASCII(const std::vector<uint8_t> &data, std::filesystem::path path, uint8_t valeurMax) {
 	std::ifstream stream(path);
 	if (!stream.is_open()) {
 		std::cout << std::format("The file {} can't be open",path.string());
@@ -30,7 +30,7 @@ std::string transformToASCII(const std::vector<PRECISION> &data, std::filesystem
 	return transformToASCII(data,palette, valeurMax);
 }
 
-std::string transformToASCII(const std::vector<PRECISION> &data, const std::string &palette, PRECISION valeurMax) {
+std::string transformToASCII(const std::vector<uint8_t> &data, const std::string &palette, uint8_t valeurMax) {
 	if (palette.empty() || valeurMax <= 0) return {};
 
 	std::stringstream ss;
