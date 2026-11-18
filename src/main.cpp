@@ -20,15 +20,15 @@ int main() {
 #else
 	std::locale::global(std::locale("en_US.UTF-8"));
 #endif
-	std::vector<uint8_t> pixelData = {
+	std::vector<Pixel> pixelData = {
 		0, 10, 20, 30,
 		80, 90,100, 110,
 		150,160,170,180,
 		200, 150, 10, 5
 	};
-	std::string defaultPalette = "Wwli:,. ";
-	uint8_t valeurMax = 255;
-	std::vector<uint8_t> newPixelData = resize({4,4}, {2,2},pixelData);
+	std::vector<std::string> defaultPalette = {"W","w","l","i",":",",","."," " };
+	Pixel valeurMax = 255;
+	std::vector<Pixel> newPixelData = resize({4,4}, {2,2},pixelData);
 
 	std::cout << transformToASCII(pixelData,defaultPalette,valeurMax) << '\n';
 	std::cout << transformToASCII(newPixelData,defaultPalette,valeurMax);

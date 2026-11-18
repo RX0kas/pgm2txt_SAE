@@ -4,8 +4,8 @@
 #include <vector>
 #include "Image.h"
 
-std::string transformToASCII(const std::vector<uint8_t>& data,const std::string& palette, uint8_t valeurMax);
-std::string transformToASCII(const std::vector<uint8_t>& data, std::filesystem::path path, uint8_t valeurMax);
+std::string transformToASCII(const std::vector<Pixel>& data,const std::vector<std::string>& palette, Pixel valeurMax);
+std::string transformToASCII(const std::vector<Pixel>& data, std::filesystem::path path, Pixel valeurMax);
 bool saveToFile(const std::filesystem::path& file, const std::string& data);
 
 #endif //ASCIIART_DECODER_H
