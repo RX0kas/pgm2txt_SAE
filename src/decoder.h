@@ -3,8 +3,8 @@
 #include <filesystem>
 #include <vector>
 
-ImageData decode(std::filesystem::path file);
-ImageData decodeFromSource(std::string data);
-
+std::string transformToASCII(const std::vector<unsigned long>& data,const std::string& palette, unsigned long valeurMax);
+std::string transformToASCII(const std::vector<unsigned long>& data, std::filesystem::path path, unsigned long valeurMax);
+bool saveToFile(const std::filesystem::path& file, const std::string& data);
 
 #endif //ASCIIART_DECODER_H
