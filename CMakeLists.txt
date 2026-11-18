@@ -12,7 +12,9 @@ file(GLOB_RECURSE SOURCE CONFIGURE_DEPENDS src/*.cpp src/*.h)
 
 add_executable(ASCIIART ${SOURCE})
 
-target_link_directories(ASCIIART PRIVATE src)
+target_include_directories(ASCIIART PRIVATE src)
+
+set_target_properties(ASCIIART PROPERTIES OUTPUT_NAME pgm2txt)
 
 if (WIN32)
     message(TRACE "Windows Platform")
