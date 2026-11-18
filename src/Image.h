@@ -2,8 +2,6 @@
 #define ASCIIART_IMAGE_H
 #include <cstddef>
 #include <cstdint>
-#include <utility>
-#include <cstdint>
 #include <filesystem>
 #include <utility>
 #include <vector>
@@ -14,7 +12,6 @@ class Image {
 public:
 	explicit Image(const std::filesystem::path &fileName);
 
-	~Image();
 	[[nodiscard]] std::size_t getRowNumber() const { return m_rowColumns.first; }
 	[[nodiscard]] std::size_t getColumnNumber() const { return m_rowColumns.second; }
 	[[nodiscard]] Pixel getMaxGrayLevel() const { return m_maxGrayLevel; }

@@ -1,13 +1,12 @@
+#include <algorithm>
+#include <exception>
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include "decoder.h"
-#include "resize.h"
-#include <iostream>
-
-using namespace std;
-
-
 #include "Image.h"
+#include "resize.h"
 
 #ifdef PLATFORM_WINDOWS
 #include <Windows.h>
@@ -18,22 +17,25 @@ int main() {
 #ifdef PLATFORM_WINDOWS
 	SetConsoleOutputCP(65001);
 #else
-	std::locale::global(std::locale("en_US.UTF-8"));
+	try {
+		std::locale::global(std::locale("en_US.UTF-8"));
+	} catch (const std::exception &e) {
+		std::cerr << "Error: "<< e.what() << std::endl;
+	}
 #endif
-	std::vector<Pixel> pixelData = {
-		0, 10, 20, 30,
-		80, 90,100, 110,
-		150,160,170,180,
-		200, 150, 10, 5
-	};
-	std::vector<std::string> defaultPalette = {"W","w","l","i",":",",","."," " };
-	Pixel valeurMax = 255;
-	std::vector<Pixel> newPixelData = resize({4,4}, {2,2},pixelData);
 
-	std::cout << transformToASCII(pixelData,defaultPalette,valeurMax) << '\n';
-	std::cout << transformToASCII(newPixelData,defaultPalette,valeurMax);
+	std::string fileName;
+	std::cout << "Nom du fichier à ouvrir : ";
+	std::cin >> fileName;
 
-
+	try {
+		Image image(fileName);
+		const std::vector<std::string> palette = {"W", "w", "l", "m", "i", ",", " "};
+		std::cout << transformToASCII(image.getPixelData(), palette, image.getMaxGrayLevel()) << '\n';
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << '\n';
+		return 1;
+	}
 
 	return 0;
 }
