@@ -1,8 +1,10 @@
 #include <iostream>
+using namespace std;
+
 
 #include "Image.h"
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
+
 	return 0;
 }
