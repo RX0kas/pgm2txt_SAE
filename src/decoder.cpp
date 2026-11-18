@@ -7,30 +7,26 @@
 #include <fstream>
 #include <format>
 
-std::string transformToASCII(const std::vector<unsigned long> &data, std::filesystem::path path, unsigned long valeurMax) {
+std::string transformToASCII(const std::vector<Pixel> &data, std::filesystem::path path, Pixel valeurMax) {
 	std::ifstream stream(path);
 	if (!stream.is_open()) {
 		std::cout << std::format("The file {} can't be open",path.string());
 		exit(1);
 	}
 
-	std::string palette;
-	while (!stream.eof()) {
-		std::string temp;
-		getline(stream, temp);
-		std::string chars;
-		for (auto c : temp) {
-			if (c!='\r') {
-				chars += c;
-			}
-		}
-		palette+=chars;
+	std::vector<std::string> palette;
+	std::string line;
+	while (std::getline(stream, line)) {
+		if (!line.empty() && line.back() == '\r') line.pop_back();
+		if (!line.empty()) palette.push_back(line);
 	}
 
 	return transformToASCII(data,palette, valeurMax);
 }
 
-std::string transformToASCII(const std::vector<uint8_t> &data, const std::string &palette, unsigned long valeurMax) {
+std::string transformToASCII(const std::vector<Pixel> &data, const std::vector<std::string> &palette, Pixel valeurMax) {
+	if (palette.empty() || valeurMax <= 0) return {};
+
 	std::stringstream ss;
 	for (const auto p : data) {
 		double whiteValue = static_cast<double>(p)/static_cast<double>(valeurMax);
