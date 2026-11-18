@@ -30,7 +30,7 @@ std::string transformToASCII(const std::vector<unsigned long> &data, std::filesy
 	return transformToASCII(data,palette, valeurMax);
 }
 
-std::string transformToASCII(const std::vector<unsigned long> &data, const std::string &palette, unsigned long valeurMax) {
+std::string transformToASCII(const std::vector<uint8_t> &data, const std::string &palette, unsigned long valeurMax) {
 	std::stringstream ss;
 	for (const auto p : data) {
 		double whiteValue = static_cast<double>(p)/static_cast<double>(valeurMax);
