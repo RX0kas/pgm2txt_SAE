@@ -4,6 +4,6 @@
 #include <vector>
 
 std::string transformToASCII(const std::vector<unsigned long>& data,const std::string& palette, unsigned long valeurMax);
-
+bool saveToFile(const std::filesystem::path& file, const std::string& data);
 
 #endif //ASCIIART_DECODER_H

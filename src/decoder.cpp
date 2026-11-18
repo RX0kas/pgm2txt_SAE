@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <format>
 
 std::string transformToASCII(const std::vector<unsigned long> &data, const std::string &palette, unsigned long valeurMax) {
 	std::stringstream ss;
@@ -15,4 +17,17 @@ std::string transformToASCII(const std::vector<unsigned long> &data, const std::
 	}
 
 	return ss.str();
+}
+
+bool saveToFile(const std::filesystem::path& file, const std::string &data) {
+	std::ofstream stream(file);
+	if (!stream.is_open()) {
+		std::cout << std::format("The file {} can't be open",file.string());
+		return false;
+	}
+
+	stream << data;
+	stream.close();
+
+	return !stream.fail();
 }

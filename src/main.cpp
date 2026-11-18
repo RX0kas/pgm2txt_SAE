@@ -24,7 +24,7 @@ int main() {
 	std::string defaultPalette = "Wwli:,. ";
 	unsigned long valeurMax = 255;
 
-	std::cout << transformToASCII(pixelData, defaultPalette, valeurMax);
+	saveToFile(std::filesystem::path("test.txt"),transformToASCII(pixelData, defaultPalette, valeurMax));
 
 	return 0;
 }
